@@ -7,6 +7,8 @@ defmodule Hello.Mixfile do
      elixir: "~> 1.2",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
+     compilers: [:thrift | Mix.compilers],
+     thrift_files: Mix.Utils.extract_files(["thrift"], [:thrift]),
      deps: deps]
   end
 
@@ -27,6 +29,8 @@ defmodule Hello.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    []
+    [
+      {:thrift, github: "pinterest/elixir-thrift", submodules: true}
+    ]
   end
 end
